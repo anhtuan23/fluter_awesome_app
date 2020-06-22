@@ -14,36 +14,47 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Awesome App"),
       ),
-      body: Container(
-        color: Colors.blue[50],
-        height: 100,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      drawer: Drawer(
+        child: ListView(
+          padding: const EdgeInsets.all(0),
           children: <Widget>[
-            Container(
-              color: Colors.red,
-              padding: EdgeInsets.all(8),
-              alignment: Alignment.center,
-              width: 100,
-              height: 100,
+            UserAccountsDrawerHeader(
+              accountName: Text('Do Tuan Anh'),
+              accountEmail: Text('dotuananh.dta@gmail.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage("https://images.unsplash.com/photo-1587613755309-e8293efe70f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"),
+              ),
             ),
-            Container(
-              color: Colors.yellow,
-              padding: EdgeInsets.all(8),
-              alignment: Alignment.center,
-              width: 100,
-              height: 100,
+            ListTile(
+              leading: Icon(Icons.people),
+              title: Text('Do Tuan Anh'),
+              subtitle: Text('Developer'),
+              trailing: Icon(Icons.edit),
             ),
-            Container(
-              color: Colors.green,
-              padding: EdgeInsets.all(8),
-              alignment: Alignment.center,
-              width: 100,
-              height: 100,
+            ListTile(
+              leading: Icon(Icons.email),
+              title: Text('Contact'),
+              subtitle: Text('dotuananh.dta@gmail.com'),
+              trailing: Icon(Icons.share),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              trailing: Icon(Icons.arrow_forward),
             )
           ],
         ),
+      ),
+      body: Center(
+        child: Container(
+          color: Colors.green,
+          width: 100,
+          height: 100,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.edit),
       ),
     );
   }
