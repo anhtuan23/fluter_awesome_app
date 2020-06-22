@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 void main() {
   runApp(MaterialApp(
     home: HomePage(),
@@ -17,33 +15,31 @@ class HomePage extends StatelessWidget {
         title: Text("Awesome App"),
       ),
       body: Center(
-        child: Container(
-          padding: EdgeInsets.all(8),
-          alignment: Alignment.center,
-          width: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.red,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 10,
-              ),
-            ],
-            gradient: LinearGradient(
-              colors: [Colors.red, Colors.amber],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+              color: Colors.red,
+              padding: EdgeInsets.all(8),
+              alignment: Alignment.center,
+              width: 100,
+              height: 100,
             ),
-          ),
-          height: 100,
-          child: Text(
-            'I am a box',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            Container(
+              color: Colors.yellow,
+              padding: EdgeInsets.all(8),
+              alignment: Alignment.center,
+              width: 100,
+              height: 100,
             ),
-          ),
+            Container(
+              color: Colors.green,
+              padding: EdgeInsets.all(8),
+              alignment: Alignment.center,
+              width: 100,
+              height: 100,
+            )
+          ],
         ),
       ),
     );
