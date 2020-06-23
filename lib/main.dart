@@ -7,7 +7,25 @@ void main() {
   ));
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var myText = 'My name';
+  TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +40,8 @@ class HomePage extends StatelessWidget {
               accountName: Text('Do Tuan Anh'),
               accountEmail: Text('dotuananh.dta@gmail.com'),
               currentAccountPicture: CircleAvatar(
-                backgroundImage: NetworkImage("https://images.unsplash.com/photo-1587613755309-e8293efe70f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"),
+                backgroundImage: NetworkImage(
+                    "https://images.unsplash.com/photo-1587613755309-e8293efe70f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"),
               ),
             ),
             ListTile(
@@ -46,15 +65,50 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Container(
-          color: Colors.green,
-          width: 100,
-          height: 100,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Card(
+              child: Column(
+                children: <Widget>[
+                  Image.asset(
+                    'assets/bg.jpg',
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Text(
+                    myText,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      controller: _textEditingController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: "Enter your name",
+                          labelText: "Name"),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.edit),
+        onPressed: () {
+          myText = _textEditingController.text;
+          setState(() {});
+        },
+        child: Icon(Icons.send),
       ),
     );
   }
