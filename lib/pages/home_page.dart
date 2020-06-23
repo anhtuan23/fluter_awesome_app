@@ -1,8 +1,7 @@
 import 'package:awesome_app/my_drawer.dart';
 import 'package:flutter/material.dart';
-
-import '../my_card.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,12 +9,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var myText = 'My name';
-  TextEditingController _textEditingController = TextEditingController();
-
+  // var myText = 'My name';
+  // TextEditingController _textEditingController = TextEditingController();
+  var url = 'https://jsonplaceholder.typicode.com/photos';
+  var data;
   @override
   void initState() {
     super.initState();
+    fetchData();
+  }
+
+  void fetchData() async {
+    var res = await http.get(url);
+    data = jsonDecode(res.body);
+    setState(() {});
   }
 
   @override
@@ -30,54 +37,22 @@ class _HomePageState extends State<HomePage> {
         title: Text("Awesome App"),
       ),
       drawer: MyDrawer(),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: MyCard(myText: myText, textEditingController: _textEditingController),
-          ),
-        ),
-      ),
+      body: data != null
+          ? ListView.builder(
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(data[index]['title']),
+                  subtitle: Text('ID: ${data[index]['id']}'),
+                  leading: Image.network(data[index]['url']),
+                );
+              },
+              itemCount: data.length,
+            )
+          : Center(child: CircularProgressIndicator()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          myText = _textEditingController.text;
-          setState(() {});
-        },
-        child: Icon(Icons.send),
-      ),
-    );
-  }
-}
-class HomePageState extends State<HomePage> {
-  var myText = 'My name';
-  TextEditingController _textEditingController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Awesome App"),
-      ),
-      drawer: MyDrawer(),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          myText = _textEditingController.text;
-          setState(() {});
+          // myText = _textEditingController.text;
+          // setState(() {});
         },
         child: Icon(Icons.send),
       ),
